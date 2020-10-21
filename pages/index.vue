@@ -9,13 +9,13 @@
       sm8
       md6
     >
-      <div class="text-center">
+      <!-- <div class="text-center">
         <logo />
         <vuetify-logo />
-      </div>
-      <v-card width="800px" height="500px">
+      </div> -->
+      <v-card flat width="800px" height="500px" class="mt-10">
         <v-card-title class="headline">
-          Welcome to the Vuetify + Nuxt.js template
+          Welcome to our contact registration service. we glad to know u.
         </v-card-title>
         <v-card-text>
           <h3 class="success--text"> This is Minilik </h3>
