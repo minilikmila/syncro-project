@@ -33,7 +33,8 @@
     <template v-slot:append d>
         <div>
          <v-layout>
-            <v-btn block class="primary"> <v-icon>mdi-logout</v-icon> Logout</v-btn>
+            <v-btn block class="primary" @click="logout"
+            > <v-icon>mdi-logout</v-icon> Logout</v-btn>
          </v-layout>
         </div>
       </template>
@@ -58,6 +59,7 @@
       :clipped-left="clipped"
       fixed
       app
+
       class="green lighten-1"
     >
       <v-app-bar-nav-icon @click.stop="drawer = !drawer" class="white--text"/>
@@ -65,7 +67,11 @@
       <v-toolbar-title v-text="title" class="white--text" />
 
       <v-spacer />
-      <h3 class="white--text mr-5">Profile Name</h3>
+     <div class="white--text mr-12 userbar">
+        <h3 class="title">{{$store.getters.username}}</h3>
+        <p class="subtitle">{{$store.getters.email}}</p>
+     </div>
+
       <div class="text-center">
     <v-menu offset-y
             open-delay="1"
@@ -149,11 +155,13 @@ export default {
       clipped: false,
       drawer: false,
       fixed: false,
-      title: "Contact.com",
+      title: "Contacts.com",
       items: [
           { title: 'Profile Dashboard', icon: 'mdi-view-dashboard' },
           { title: 'Photos', icon: 'mdi-image' },
           { title: 'About', icon: 'mdi-help-box' },
+          { title: 'Settings', icon: 'mdi-cog'},
+          { title: 'Logout', icon: 'mdi-logout'}
         ],
          icons: [
         'mdi-facebook',
@@ -168,10 +176,33 @@ export default {
     follow(index){
       if(this.items[index].title == 'Profile Dashboard')
        this.$router.push('/dashboard')
-      else if(this.items[index].title == 'Photos')
-       this.$router.push('/index')
-      else if (this.items[index].title == 'About')
-       this.$router.push('/signin')    }
+      // else if(this.items[index].title == 'Photos')
+      //  this.$router.push('/index')
+      // else if (this.items[index].title == 'About')
+      //  this.$router.push('/signin')
+      else if(this.items[index].title == 'Settings')
+      {
+          this.$router.push('/accsetting/' + this.$store.getters.userId)
+          // console.log("Settings");
+          // this.setting();
+      }
+      else if(this.items[index].title == 'Logout')
+       {
+         this.logout();
+       }
+       },
+
+       // perform logging out the user from its account
+       logout(){
+         this.$store.commit('setUserId', '');
+         this.$store.commit('setUsername', '');
+         this.$store.commit('setEmail', '')
+         this.$store.commit('setToken', '')
+         this.$store.commit('setPassword', '')
+         this.$store.commit('addContacts', '')
+         this.$router.push('/signin');
+       },
+       // setting is commited
   }
 }
 </script>
@@ -179,6 +210,9 @@ export default {
 .background{
   /* background-color: rgba(0, 67, 89, 0.3); */
 /* background-image: url('../assets/image/test.jpg'); */
+}
+.userbar{
+  /* margin-left: 70%; */
 }
 
 </style>
