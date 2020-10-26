@@ -241,6 +241,7 @@ export default {
         console.log(response);
         this.$store.commit('setUserId', response.id);
         this.$store.commit('setUsername', response.username);
+        this.$store.commit('setPassword', response.password)
         this.$store.commit('setEmail', response.email);
         this.$store.commit('setToken', response.token);
         this.$router.push('/dashboard');
