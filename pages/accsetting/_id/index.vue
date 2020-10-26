@@ -177,11 +177,23 @@ export default {
      //Delete Your account permanently
      deleteAccount(){
        if(this.passToDelete == this.$store.getters.password){
-           console.log("Confirmed!");
+
+          api.deleteAllContacts(this.$store.getters.userId).then(response => {
+              console.log("Confirmed!");
+              console.log(response);
+              api.deleteYourAccount(this.$store.getters.userId).then(response => {
+                console.log("Account deleted !");
+                // console.log(response);
+                this.deleteAcc = false;
+                this.$router.push('/signin');
+              });
+          });
+
        } else {
          this.confirmDelete = true;
        }
      },
+
     // get Accounts Information
     getAccountData(){
       api.getAccountInfo(this.$store.getters.userId).then(response => {
