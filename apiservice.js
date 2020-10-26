@@ -50,6 +50,17 @@ export class apiservice {
      console.log(response);
      return response;
    }
-
+  // Delete all contacts of the model (Specific account's record)
+  async deleteAllContacts(id){
+     let response = await axios.delete(`http://localhost:5000/api/Useraccounts/${id}/contacts`);
+     console.log(response);
+     return response;
+  }
+  /// Remove your user account of the model
+  async deleteYourAccount(id){
+    let response = await axios.delete(`http://localhost:5000/api/Useraccounts/${id}`);
+    console.log(response);
+    return response;
+  }
 
 }
