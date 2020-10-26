@@ -70,7 +70,7 @@
           <v-btn
             color="primary"
             nuxt
-            to="/inspire"
+            to="/signin"
             class="mt-10"
           >
             Continue
