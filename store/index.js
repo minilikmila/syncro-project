@@ -3,12 +3,13 @@ import Vuex from "vuex";
 import VuexPersist from "vuex-persist"
 import axios from "axios"
 
-if (typeof window === 'undefined') {
-  global.window = {}
-}
+// if (typeof window === 'undefined') {
+//   // global.window = {}
+//   // this.storage = option.storage || window.localStorage
+// }
 const vuexpersist = new VuexPersist({
-      key: "COAPP",
-     storage: window.localStorage
+      key: "CONAPP",
+      storage: window.localStorage
 });
 Vue.use(Vuex);
 
@@ -18,6 +19,7 @@ const createStore = () =>{
         state: {
           F_name: '',
           L_name: '',
+          imageUrl: '',
           userId: '',
           username: '',
           email: '',
@@ -36,9 +38,9 @@ const createStore = () =>{
             state.F_name = F_name;
             state.L_name = L_name;
           },
-          // setLast_name(state, L_name){
-          //   state.L_name = L_name;
-          // },
+          setImageUrl(state, imageUrl){
+            state.imageUrl = imageUrl;
+          },
           setUsername(state, username){
             state.username = username;
           },
@@ -76,6 +78,7 @@ const createStore = () =>{
           userId: state => state.userId,
           username: state => state.username,
           F_name: state => state.F_name,
+          imageUrl: state => state.imageUrl ,
           L_name: state => state.L_name,
           email: state => state.email,
           password: state => state.password,
@@ -90,4 +93,5 @@ const createStore = () =>{
 
      });
 };
-export default createStore;
+
+  export default createStore;
