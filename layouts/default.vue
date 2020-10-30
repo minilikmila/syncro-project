@@ -10,7 +10,7 @@
       <v-list-item>
         <v-list-item-content>
           <v-list-item-title class="title">
-               Application
+               contacts.com
           </v-list-item-title>
           <v-list-item-subtitle>
             Subtitle
@@ -19,6 +19,9 @@
       </v-list-item>
    <v-divider></v-divider>
    <v-list nav dense>
+     <v-avatar circle width="3%" class="mr-4 justify-center avatarsetting" >
+             <v-img :src="'http://localhost:5000/api/containers/images/download/'+ $store.getters.imageUrl"/>
+         </v-avatar>
      <v-list-item v-for="(itemlist,index) in items"
      :key="index"
      link >
@@ -26,17 +29,17 @@
             <v-icon class="primary--text">{{ itemlist.icon }}</v-icon>
        </v-list-item-icon>
        <v-list-item-content>
-        <v-list-item-title @click="follow(index)" class="primary--text">{{ itemlist.title }}</v-list-item-title>
+        <v-list-item-title @click="follow(index)" class="primary--text" link>{{ itemlist.title }}</v-list-item-title>
        </v-list-item-content>
      </v-list-item>
    </v-list>
     <template v-slot:append d>
-        <div>
+        <!-- <div>
          <v-layout>
             <v-btn block class="primary" @click="logout"
             > <v-icon>mdi-logout</v-icon> Logout</v-btn>
          </v-layout>
-        </div>
+        </div> -->
       </template>
       <!-- <v-list>
         <v-list-item
@@ -67,10 +70,20 @@
       <v-toolbar-title v-text="title" class="white--text" />
 
       <v-spacer />
-     <div class="white--text mr-12 userbar">
+        <v-avatar circle width="3%" class="mr-4">
+             <v-img :src="'http://localhost:5000/api/containers/images/download/'+ $store.getters.imageUrl"/>
+         </v-avatar>
+        <div >
+          <p class="subtitle-1 white--text userName">{{$store.getters.username}}</p>
+          <p class="subtitle-2 white--text email"><nuxt-link to="www.google.com"> {{$store.getters.email}}
+                                                  </nuxt-link></p>
+        </div>
+
+
+         <!-- <div class="white--text mr-12 userbar" >
         <h3 class="title">{{$store.getters.username}}</h3>
         <p class="subtitle">{{$store.getters.email}}</p>
-     </div>
+     </div> -->
 
       <div class="text-center">
     <v-menu offset-y
@@ -96,7 +109,11 @@
           :key="index"
           @click="follow(index)"
         >
-          <v-list-item-title class="info--text">{{ item.title }}</v-list-item-title>
+        <v-list-item-icon>
+          <v-icon class="primary--text">{{ item.icon }}</v-icon>
+        </v-list-item-icon>
+          <v-list-item-title class="info--text" link >{{ item.title }}</v-list-item-title>
+          <!-- <v-list-item-list><nuxt-link to>{{ item.title }}</nuxt-link></v-list-item-list> -->
         </v-list-item>
       </v-list>
     </v-menu>
@@ -158,7 +175,7 @@ export default {
       title: "Contacts.com",
       items: [
           { title: 'Profile Dashboard', icon: 'mdi-view-dashboard' },
-          { title: 'Photos', icon: 'mdi-image' },
+          // { title: 'Photos', icon: 'mdi-image' },
           { title: 'About', icon: 'mdi-help-box' },
           { title: 'Settings', icon: 'mdi-cog'},
           { title: 'Logout', icon: 'mdi-logout'}
@@ -175,11 +192,11 @@ export default {
   methods: {
     follow(index){
       if(this.items[index].title == 'Profile Dashboard')
-       this.$router.push('/dashboard')
+       this.$router.push('/dashboard/'+ this.$store.getters.userId)
       // else if(this.items[index].title == 'Photos')
       //  this.$router.push('/index')
-      // else if (this.items[index].title == 'About')
-      //  this.$router.push('/signin')
+      else if (this.items[index].title == 'About')
+       this.$router.push('/about')
       else if(this.items[index].title == 'Settings')
       {
           this.$router.push('/accsetting/' + this.$store.getters.userId)
@@ -200,6 +217,7 @@ export default {
          this.$store.commit('setToken', '')
          this.$store.commit('setPassword', '')
          this.$store.commit('addContacts', '')
+         this.$store.commit('setImageUrl', '')
          this.$router.push('/signin');
        },
        // setting is commited
@@ -213,6 +231,13 @@ export default {
 }
 .userbar{
   /* margin-left: 70%; */
+}
+.userName{
+  margin-top: 8%;
+  margin-bottom: -3%;
+}
+.avatarsetting{
+  margin-left: 28% ;
 }
 
 </style>
