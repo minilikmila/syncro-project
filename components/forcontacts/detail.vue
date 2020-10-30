@@ -1,93 +1,73 @@
 <template>
   <v-container>
-      <h2 class="font-italic mt-5 mb-2 font-weight-light info--text text-center">
-        See more detail of your contact :- <strong class="red--text"> {{contactInfo.F_name}} {{contactInfo.L_name }}</strong></h2>
-        <section>
-           <!-- <v-card
-              flat
-              tile
-              width="90%"
-              height="300"
-              class="mx-auto imagetitle mt-12"
-            >
-    <v-layout>
-      <v-flex>
-        <v-img
-          class="bigimg"
-          height="300"
-          src="https://cdn.vuetifyjs.com/images/cards/server-room.jpg"
-        >
-          <v-layout
-            align-end
-            fill-height
-            wrap
-          >
-                          :size="$vuetify.breakpoint.smAndUp ? 150 : 50"
-           <v-flex shrink align-self-end>
-                <v-avatar circle  width="30%"
-                                  height="150px"
-                          class="avatarsetting">
-                <v-img src="https://cdn.vuetifyjs.com/images/profiles/marcus.jpg" />
-                </v-avatar>
-            </v-flex>
-            <v-list-item
-              dark
-              color="rgba(0, 0, 0, .4)"
-            >
-              <v-list-item-content>
-                <v-list-item-title class="title">{{contactInfo.F_name}}</v-list-item-title>
-                <v-list-item-subtitle class="font-italic">{{contactInfo.email}}</v-list-item-subtitle>
-
-              </v-list-item-content>
-            </v-list-item>
-          </v-layout>
-        </v-img>
-      </v-flex>
-    </v-layout>
-  </v-card> -->
-            <v-card width="90%" tile
+      <h3 class="font-italic mt-5 mb-2 font-weight-light info--text text-center">
+                See more detail of your contact :- <strong class="red--text">
+                  {{contactInfo.F_name}} {{contactInfo.L_name }}</strong></h3>
+       <v-layout>
+         <v-flex d-flex lg4 md4 sm4>
+            <v-card width="100%" height="100%" flat v-if="contactInfo.imageUrl !=''">
+              <v-img :src="'http://localhost:5000/api/containers/images/download/'+contactInfo.imageUrl"
+               height="76%" />
+            </v-card>
+         </v-flex>
+          <v-flex d-flex lg8 md8 sm8>
+            <v-card width="100%" tile
                     class="cardlayout justify-center align-center">
-               <v-img src="https://cdn.vuetifyjs.com/images/cards/server-room.jpg"
+               <!-- <v-img src="https://cdn.vuetifyjs.com/images/cards/server-room.jpg"
                         height="230"
                         > <v-card-title class="white--text justify-center">See detail here</v-card-title>
-                         <v-avatar circle  width="10%"
-                                  height="100px"
-                          class="avatarsetting">
-                         <v-img src="https://cdn.vuetifyjs.com/images/profiles/marcus.jpg" />
+                         <v-avatar circle  width="15%" v-if="contactInfo.imageUrl !=''"
+                                     height="133px"
+                                     class="avatarsetting">
+                         <v-img :src="'http://localhost:5000/api/containers/images/download/'+contactInfo.imageUrl" />
                 </v-avatar>
-                          <v-list-item-content class="ml-5">
+                          <v-list-item-content class="sideAddress">
                           <v-list-item-title class="title white--text">{{contactInfo.F_name}}</v-list-item-title>
                           <v-list-item-subtitle class="font-italic white--text">{{contactInfo.email}}</v-list-item-subtitle>
 
                         </v-list-item-content>
-                         <!-- <p class="subtitle-1 ml-10 mt-12 font-italic wite--text darken-5"></p> -->
-                    </v-img>
-              <v-card-text class="mt-12">
+                    </v-img> -->
+              <v-card-text class="mt-8">
                <v-layout>
                  <div>
-                <h3 class=""><v-icon>mdi-account</v-icon>Name: -  {{ contactInfo.F_name}}</h3>
-                <h3 class="mt-2"><v-icon>mdi-home-city</v-icon>City: - {{contactInfo.city}}</h3>
-                <h3 class="mt-2"><v-icon>mdi-road-variant</v-icon>Street: - {{contactInfo.street}}</h3>
-                <h3 class="mt-2"><v-icon>mdi-home-city</v-icon>State: - {{contactInfo.state}}</h3>
-                <h3 class="mt-2"><v-icon>mdi-zip-box-outline</v-icon>ZipCode: - {{contactInfo.zip}}</h3>
+                <strong class=""><v-icon class="primary--text">mdi-account</v-icon>
+                    FullName   <p class="primary--text ml-12">{{ contactInfo.F_name}} {{contactInfo.L_name}}</p>
+                    </strong>
+                <strong class="mt-1"><v-icon class="primary--text">mdi-home-city</v-icon>City
+                 <p class="primary--text ml-12">{{contactInfo.city}}</p></strong>
+                <strong class="mt-1"><v-icon class="primary--text">mdi-road-variant</v-icon>Street
+                 <p class="primary--text ml-12">{{contactInfo.street}}</p></strong>
+                <strong class="mt-1"><v-icon class="primary--text">mdi-home-city</v-icon>State
+                 <p class="primary--text ml-12">{{contactInfo.state}}</p></strong>
+                <strong class="mt-1"><v-icon class="primary--text">mdi-zip-box-outline</v-icon>ZipCode
+                 <p class="primary--text ml-12">{{contactInfo.zip}}</p></strong>
+                  <strong class="mt-1"><v-icon class="primary--text">mdi-phone</v-icon>
+                              Phone_No_ <p class="primary--text ml-12 subtitle-1">{{ contactInfo.Phone_no}}</p></strong>
                  </div>
                  <div class="listElements">
-                <h3 class="mt-2"><v-icon>mdi-Phone</v-icon>Phone_No_: - {{ contactInfo.Phone_no}}</h3>
-                <h3 class=""> <v-icon>mdi-email</v-icon>Email: - {{ contactInfo.email }}</h3>
-                <h3 class="mt-2"><v-icon>mdi-facebook</v-icon>facebook account: - {{contactInfo.facebook}}</h3>
-                <h3 class="mt-2"><v-icon>mdi-twitter</v-icon>twitter account: - {{contactInfo.twitter}}</h3>
-                <h3 class="mt-2"><v-icon>mdi-linkedin</v-icon>linkedin account: - {{contactInfo.linkedin}}</h3>
 
+                <strong class=""> <v-icon class="primary--text">mdi-email</v-icon>
+                              Email <p class="primary--text ml-12 subtitle-1">{{ contactInfo.email }}</p></strong>
+                <strong class="mt-1"><v-icon class="primary--text">mdi-facebook</v-icon>
+                              facebook account <p class="primary--text ml-12 subtitle-1"> {{contactInfo.facebook}}</p></strong>
+                <strong class="mt-1"><v-icon class="primary--text">mdi-twitter</v-icon>
+                                twitter account <p class="primary--text ml-12"> {{contactInfo.facebook}}</p></strong>
+                <strong class="mt-1"><v-icon class="primary--text">mdi-linkedin</v-icon>
+                Linkedin account: - <p class="primary--text ml-12 subtitle-1"> {{contactInfo.linkedin}}</p></strong>
+                <strong class="mt-1"><v-icon class="primary--text">mdi-instagram</v-icon>
+                Instagram account <p class="primary--text ml-12 subtitle-1">{{contactInfo.Instagram}}</p></strong>
                  </div>
                </v-layout>
               </v-card-text>
               <v-card-actions class="mt-12">
-                <v-btn class=" red--text mr-5" outlined text @click="$router.push('/dashboard')">Cancel <v-icon>mdi-close-circle</v-icon></v-btn>
+                <v-btn class=" red--text mr-5" outlined text @click="$router.push('/dashboard/'+ $store.getters.userId)">
+                       <v-icon class="mr-2">mdi-close-box-outline</v-icon> Cancel</v-btn>
                 <v-btn class=" success--text" outlined text
-                       @click="$router.push('/edit/'+ id)"> Edit <v-icon>mdi-pencil</v-icon></v-btn>
+                       @click="$router.push('/edit/'+ id)"><v-icon class="mr-2">mdi-pencil</v-icon> Edit </v-btn>
               </v-card-actions>
             </v-card>
-        </section>
+        </v-flex>
+       </v-layout>
   </v-container>
 </template>
 <script>
@@ -135,7 +115,7 @@ export default {
   margin-left: 35%;
 }
 .cardlayout{
-  margin-left: 5%;
+  /* margin-left: 5%; */
   margin-bottom: 20%;
   /* margin-top: 7%; */
 }
@@ -151,10 +131,14 @@ export default {
 .avatarsetting{
   /* margin-top: 23%; */
   /* margin-bottom: -30%; */
-  margin-left: 45%;
+  margin-left: 42%;
   opacity: 0.9;
 }
 .listElements{
   margin-left: 40%;
+}
+.sideAddress{
+  margin-top: -5%;
+  margin-left: 2%;
 }
 </style>
