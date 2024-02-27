@@ -13,6 +13,8 @@ const vuexpersist = new VuexPersist({
 });
 Vue.use(Vuex);
 
+// Vuex management for all 
+
 const createStore = () =>{
 
    return new Vuex.Store({
